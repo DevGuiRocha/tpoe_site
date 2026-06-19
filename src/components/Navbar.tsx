@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 import styles from './Navbar.module.css'
 
 const navItems = [
-  { label: 'Enredo', path: '/enredo' },
+  { label: 'Bienvenue', path: '/enredo' },
   { label: 'Famílias Alfa', path: '/familias/alfa' },
   { label: 'Famílias Beta', path: '/familias/beta' },
   { label: 'Famílias Gama', path: '/familias/gama' },
