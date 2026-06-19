@@ -7,6 +7,7 @@ const navItems = [
   { label: 'Famílias Alfa', path: '/familias/alfa' },
   { label: 'Famílias Beta', path: '/familias/beta' },
   { label: 'Famílias Gama', path: '/familias/gama' },
+  { label: 'Independentes', path: '/independentes' },
   { label: 'Cenários', path: '/cenarios' },
 ]
 
