@@ -240,6 +240,35 @@
   opacity: 0.6;
 }
 
+.familyLink {
+  color: var(--color-text);
+  transition: color 0.2s;
+}
+
+.familyLink:hover {
+  color: var(--color-gold);
+}
+
+.familyItemMuted {
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+.familyTierMore {
+  display: inline-block;
+  margin-top: 1.25rem;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+.familyTierMore:hover {
+  opacity: 1;
+}
+
 @media (max-width: 768px) {
   .familiesGrid {
     grid-template-columns: 1fr;

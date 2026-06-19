@@ -1,14 +1,16 @@
+import { Link } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import { useFamilies } from '../hooks/useFamilies'
+import { tierInfo } from '../data/families'
+import type { Family, Tier } from '../types/family'
 import styles from './HomePage.module.css'
 
-const families = {
-  alfa: ['Servitje-Sikes', 'Ashbourne', 'Fletcher', 'Pemberton-Sinclair', 'Van Hout', 'Maldonado'],
-  beta: ['Lavallière', 'Rossetti-Ashford', 'Archambault', 'Narong', 'Viëtor'],
-  gama: ['Dmitriev Dawson', 'Tchaikovsky', 'Hawthorne & Sterling', 'Blaine', 'Durant'],
-}
+const TIERS: Tier[] = ['Alfa', 'Beta', 'Gama']
 
 export default function HomePage() {
+  const { data: families, loading } = useFamilies()
+
   return (
     <div className={styles.page}>
       <Navbar />
@@ -57,9 +59,14 @@ export default function HomePage() {
           <h2 className={styles.sectionHeading}>Quem governa Mônaco</h2>
 
           <div className={styles.familiesGrid}>
-            <FamilyTier tier="Alfa" names={families.alfa} />
-            <FamilyTier tier="Beta" names={families.beta} />
-            <FamilyTier tier="Gama" names={families.gama} />
+            {TIERS.map((tier) => (
+              <FamilyTier
+                key={tier}
+                tier={tier}
+                families={families.filter((f) => f.categoria === tier)}
+                loading={loading}
+              />
+            ))}
           </div>
         </div>
       </section>
@@ -88,7 +95,15 @@ export default function HomePage() {
   )
 }
 
-function FamilyTier({ tier, names }: { tier: string; names: string[] }) {
+interface FamilyTierProps {
+  tier: Tier
+  families: Family[]
+  loading: boolean
+}
+
+function FamilyTier({ tier, families, loading }: FamilyTierProps) {
+  const info = tierInfo[tier]
+
   return (
     <div className={styles.familyTier}>
       <div className={styles.familyTierHeader}>
@@ -96,13 +111,28 @@ function FamilyTier({ tier, names }: { tier: string; names: string[] }) {
         <h3 className={styles.familyTierTitle}>{tier}</h3>
       </div>
       <ul className={styles.familyList}>
-        {names.map((name) => (
-          <li key={name} className={styles.familyItem}>
-            <span className={styles.familyDot} />
-            {name}
+        {loading ? (
+          <li className={`${styles.familyItem} ${styles.familyItemMuted}`}>
+            Carregando...
           </li>
-        ))}
+        ) : families.length === 0 ? (
+          <li className={`${styles.familyItem} ${styles.familyItemMuted}`}>
+            Em breve.
+          </li>
+        ) : (
+          families.map((f) => (
+            <li key={f.slug} className={styles.familyItem}>
+              <span className={styles.familyDot} />
+              <Link to={`/familias/${f.slug}`} className={styles.familyLink}>
+                {f.nome}
+              </Link>
+            </li>
+          ))
+        )}
       </ul>
+      <Link to={info.path} className={styles.familyTierMore}>
+        Ver todas →
+      </Link>
     </div>
   )
 }
