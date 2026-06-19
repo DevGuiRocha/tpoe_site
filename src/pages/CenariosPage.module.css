@@ -60,21 +60,12 @@
   width: 100%;
 }
 
-.mapPlaceholder {
+.map {
   width: 100%;
   aspect-ratio: 16 / 7;
-  background: var(--color-dark-mid);
-  border: 1px dashed var(--color-dark-soft);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.mapPlaceholderText {
-  font-size: 0.7rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--color-text-muted);
+  border: none;
+  display: block;
+  filter: grayscale(20%) contrast(1.05);
 }
 
 /* ── Distritos ───────────────────────────────── */

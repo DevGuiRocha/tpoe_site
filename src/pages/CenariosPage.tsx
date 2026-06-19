@@ -21,9 +21,14 @@ export default function CenariosPage() {
 
           {/* Mapa geral */}
           <section className={styles.mapSection}>
-            <div className={styles.mapPlaceholder}>
-              <span className={styles.mapPlaceholderText}>Mapa de Mônaco — em breve</span>
-            </div>
+            <iframe
+              className={styles.map}
+              src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d5636.890804572!2d7.4246!3d43.7384!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1spt-BR!2sbr!4v1718800000000"
+              title="Mapa de Mônaco"
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
           </section>
 
           {/* Distritos */}
