@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import type { Family } from '../data/families'
+import type { Family } from '../types/family'
 import styles from './FamilyCard.module.css'
 
 interface Props {

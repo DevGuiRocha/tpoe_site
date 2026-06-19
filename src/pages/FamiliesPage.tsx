@@ -1,7 +1,9 @@
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import FamilyCard from '../components/FamilyCard'
-import { familiesByTier, tierInfo, type Tier } from '../data/families'
+import { useFamiliesByTier } from '../hooks/useFamilies'
+import { tierInfo } from '../data/families'
+import type { Tier } from '../types/family'
 import styles from './FamiliesPage.module.css'
 
 interface Props {
@@ -10,7 +12,7 @@ interface Props {
 
 export default function FamiliesPage({ tier }: Props) {
   const info = tierInfo[tier]
-  const list = familiesByTier(tier)
+  const { data, loading, error } = useFamiliesByTier(tier)
 
   return (
     <div className={styles.page}>
@@ -27,7 +29,13 @@ export default function FamiliesPage({ tier }: Props) {
           </header>
 
           <section className={styles.grid}>
-            {list.map((family) => (
+            {loading && (
+              <p className={styles.status}>Carregando...</p>
+            )}
+            {error && (
+              <p className={styles.statusError}>{error}</p>
+            )}
+            {!loading && !error && data.map((family) => (
               <FamilyCard key={family.slug} family={family} />
             ))}
           </section>

@@ -144,3 +144,29 @@
   font-size: 0.95rem;
   color: var(--color-text-muted);
 }
+
+.residenciaImage {
+  width: 100%;
+  max-width: 600px;
+  border: 1px solid var(--color-dark-soft);
+  display: block;
+  margin: 0 auto;
+}
+
+.statusWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+}
+
+.status {
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--color-text-muted);
+}
+
+.statusError {
+  font-size: 0.85rem;
+  color: #c0392b;
+}
