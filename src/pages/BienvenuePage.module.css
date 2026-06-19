@@ -1,0 +1,150 @@
+.page {
+  min-height: 100vh;
+}
+
+.main {
+  padding-top: 8rem;
+  padding-bottom: 6rem;
+}
+
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+/* ── Header ──────────────────────────────────── */
+.header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.eyebrow {
+  font-size: 0.6rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-size: clamp(3rem, 10vw, 5.5rem);
+  font-weight: 300;
+  color: var(--color-cream);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.divider {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--color-gold), transparent);
+  margin-top: 0.5rem;
+}
+
+/* ── Article ─────────────────────────────────── */
+.article {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  border-left: 1px solid var(--color-dark-soft);
+  padding-left: 2rem;
+}
+
+.paragraph {
+  font-family: var(--font-serif);
+  font-size: clamp(1rem, 2vw, 1.125rem);
+  line-height: 1.9;
+  color: var(--color-text);
+  font-weight: 400;
+}
+
+/* ── Links ───────────────────────────────────── */
+.links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  padding-left: 2rem;
+}
+
+.socialLink {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-text-muted);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  transition: color 0.25s;
+}
+
+.socialLink:hover {
+  color: var(--color-gold);
+}
+
+.receptionLink {
+  margin-left: auto;
+  padding: 0.6rem 2rem;
+  border: 1px solid var(--color-gold);
+  color: var(--color-gold);
+  font-size: 0.6rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  transition: background 0.3s, color 0.3s;
+}
+
+.receptionLink:hover {
+  background: var(--color-gold);
+  color: var(--color-dark);
+}
+
+/* ── Signature ───────────────────────────────── */
+.signature {
+  border-top: 1px solid var(--color-dark-soft);
+  padding-top: 2rem;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.signatureText {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+.signatureXoxo {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  color: var(--color-gold);
+  letter-spacing: 0.05em;
+}
+
+.signatureXoxo em {
+  font-style: italic;
+}
+
+@media (max-width: 600px) {
+  .article {
+    padding-left: 1rem;
+  }
+
+  .links {
+    padding-left: 1rem;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .receptionLink {
+    margin-left: 0;
+  }
+}
