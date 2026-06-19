@@ -23,14 +23,18 @@ export default function Navbar() {
         </NavLink>
 
         <button
-          className={styles.menuToggle}
+          className={`${styles.menuToggle} ${menuOpen ? styles.menuOpen : ''}`}
           onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Menu"
+          aria-label={menuOpen ? 'Fechar menu' : 'Abrir menu'}
         >
           <span />
           <span />
           <span />
         </button>
+
+        {menuOpen && (
+          <div className={styles.menuBackdrop} onClick={() => setMenuOpen(false)} />
+        )}
 
         <ul className={`${styles.navList} ${menuOpen ? styles.open : ''}`}>
           {navItems.map((item) => (

@@ -94,12 +94,33 @@
   width: 22px;
   height: 1px;
   background: var(--color-gold);
-  transition: all 0.25s;
+  transition: transform 0.25s, opacity 0.25s;
+}
+
+.menuOpen span:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.menuOpen span:nth-child(2) {
+  opacity: 0;
+}
+
+.menuOpen span:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+.menuBackdrop {
+  display: none;
 }
 
 @media (max-width: 768px) {
   .menuToggle {
     display: flex;
+  }
+
+  .menuToggle {
+    z-index: 101;
+    position: relative;
   }
 
   .navList {
