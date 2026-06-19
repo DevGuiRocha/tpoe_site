@@ -104,16 +104,18 @@
 
   .navList {
     display: none;
-    position: absolute;
-    top: 100%;
+    position: fixed;
+    top: 0;
     left: 0;
     right: 0;
+    bottom: 0;
     flex-direction: column;
     background: rgba(10,10,10,0.98);
-    padding: 1.5rem 2rem;
-    gap: 1.25rem;
+    padding: 5rem 2rem 2rem;
+    gap: 1.5rem;
     align-items: flex-start;
-    border-top: 1px solid var(--color-dark-soft);
+    justify-content: flex-start;
+    z-index: 99;
   }
 
   .navList.open {
@@ -122,5 +124,6 @@
 
   .header {
     background: rgba(10,10,10,0.98);
+    z-index: 100;
   }
 }
