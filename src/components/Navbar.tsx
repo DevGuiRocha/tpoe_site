@@ -8,7 +8,6 @@ const navItems = [
   { label: 'Famílias Beta', path: '/familias/beta' },
   { label: 'Famílias Gama', path: '/familias/gama' },
   { label: 'Cenários', path: '/cenarios' },
-  { label: 'Contato', path: '/contato' },
 ]
 
 export default function Navbar() {
