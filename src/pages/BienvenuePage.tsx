@@ -55,7 +55,9 @@ export default function BienvenuePage() {
               <span>@rpgofmonaco</span>
             </a>
             <a
-              href="/contato"
+              href="https://chat.whatsapp.com/GEFtOavgfa703DgKBwsDaE?s=cl&p=a&mlu=3"
+              target="_blank"
+              rel="noopener noreferrer"
               className={styles.receptionLink}
             >
               RECEPÇÃO

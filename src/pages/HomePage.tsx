@@ -70,7 +70,14 @@ export default function HomePage() {
           <p className={styles.ctaEyebrow}>Pronta para entrar?</p>
           <h2 className={styles.ctaHeading}>A sua história começa aqui</h2>
           <div className={styles.ctaButtons}>
-            <a href="/contato" className={styles.ctaButtonPrimary}>Entre em contato</a>
+            <a
+              href="https://chat.whatsapp.com/GEFtOavgfa703DgKBwsDaE?s=cl&p=a&mlu=3"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.ctaButtonPrimary}
+            >
+              Recepção
+            </a>
             <a href="/enredo" className={styles.ctaButtonSecondary}>Ler o enredo</a>
           </div>
         </div>
