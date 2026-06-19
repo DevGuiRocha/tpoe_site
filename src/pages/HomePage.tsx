@@ -38,7 +38,7 @@ export default function HomePage() {
       {/* Intro */}
       <section className={styles.intro}>
         <div className={styles.introInner}>
-          <p className={styles.introLabel}>2030 · Roleplay</p>
+          <p className={styles.introLabel}>2032 · Roleplay</p>
           <h2 className={styles.introHeading}>O que te aguarda em Mônaco?</h2>
           <p className={styles.introText}>
             Expandir seu negócio? Iniciar seus estudos? Sair da casa dos pais?
