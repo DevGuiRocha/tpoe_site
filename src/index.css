@@ -1,0 +1,43 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --color-gold: #C9A96E;
+  --color-gold-light: #E8D5B0;
+  --color-dark: #0A0A0A;
+  --color-dark-mid: #1A1A1A;
+  --color-dark-soft: #2A2A2A;
+  --color-cream: #F5F0E8;
+  --color-cream-soft: #EDE8DE;
+  --color-text: #D4C9B5;
+  --color-text-muted: #8A8070;
+
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Montserrat', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-dark);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-weight: 300;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}

@@ -1,0 +1,319 @@
+/* ── Hero ─────────────────────────────────────── */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 60% 40%, rgba(201,169,110,0.07) 0%, transparent 60%),
+    radial-gradient(ellipse at 20% 80%, rgba(201,169,110,0.04) 0%, transparent 50%),
+    var(--color-dark);
+}
+
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  background: url('/hero-pattern.svg') center/300px repeat;
+  opacity: 0.025;
+  pointer-events: none;
+}
+
+.heroContent {
+  position: relative;
+  text-align: center;
+  padding: 2rem;
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.heroEyebrow {
+  font-size: 0.65rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  opacity: 0.7;
+}
+
+.heroTitle {
+  font-family: var(--font-serif);
+  font-size: clamp(4rem, 12vw, 8rem);
+  font-weight: 300;
+  color: var(--color-cream);
+  letter-spacing: 0.08em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.heroTagline {
+  font-size: 0.7rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+
+.heroDivider {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--color-gold), transparent);
+  margin: 0.5rem 0;
+}
+
+.heroQuote {
+  font-family: var(--font-serif);
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  font-style: italic;
+  color: var(--color-text);
+  line-height: 1.8;
+  opacity: 0.85;
+}
+
+.heroCta {
+  margin-top: 1rem;
+  display: inline-block;
+  padding: 0.75rem 2.5rem;
+  border: 1px solid var(--color-gold);
+  color: var(--color-gold);
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  transition: background 0.3s, color 0.3s;
+}
+
+.heroCta:hover {
+  background: var(--color-gold);
+  color: var(--color-dark);
+}
+
+.heroScroll {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.heroScroll span {
+  display: block;
+  width: 1px;
+  height: 48px;
+  background: linear-gradient(to bottom, transparent, var(--color-gold));
+  animation: scrollLine 1.8s ease-in-out infinite;
+}
+
+@keyframes scrollLine {
+  0% { opacity: 0; transform: scaleY(0); transform-origin: top; }
+  50% { opacity: 1; transform: scaleY(1); transform-origin: top; }
+  100% { opacity: 0; transform: scaleY(1); transform-origin: bottom; }
+}
+
+/* ── Intro ────────────────────────────────────── */
+.intro {
+  padding: 6rem 2rem;
+  border-top: 1px solid var(--color-dark-soft);
+}
+
+.introInner {
+  max-width: 680px;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.introLabel {
+  font-size: 0.6rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+
+.introHeading {
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 400;
+  color: var(--color-cream);
+  line-height: 1.2;
+}
+
+.introText {
+  font-size: 0.9rem;
+  line-height: 1.9;
+  color: var(--color-text-muted);
+}
+
+/* ── Families ─────────────────────────────────── */
+.families {
+  padding: 6rem 2rem;
+  background: var(--color-dark-mid);
+}
+
+.familiesInner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.sectionLabel {
+  font-size: 0.6rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  text-align: center;
+}
+
+.sectionHeading {
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 400;
+  color: var(--color-cream);
+  text-align: center;
+  margin-top: 0.75rem;
+  margin-bottom: 3.5rem;
+}
+
+.familiesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.familyTier {
+  border: 1px solid var(--color-dark-soft);
+  padding: 2rem;
+  transition: border-color 0.3s;
+}
+
+.familyTier:hover {
+  border-color: var(--color-gold);
+}
+
+.familyTierHeader {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--color-dark-soft);
+}
+
+.familyTierLabel {
+  font-size: 0.55rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+.familyTierTitle {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: var(--color-gold);
+}
+
+.familyList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.familyItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.8rem;
+  color: var(--color-text);
+  letter-spacing: 0.05em;
+}
+
+.familyDot {
+  display: block;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--color-gold);
+  flex-shrink: 0;
+  opacity: 0.6;
+}
+
+@media (max-width: 768px) {
+  .familiesGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── CTA ──────────────────────────────────────── */
+.cta {
+  padding: 6rem 2rem;
+  text-align: center;
+  background: radial-gradient(ellipse at 50% 50%, rgba(201,169,110,0.06) 0%, transparent 70%);
+}
+
+.ctaInner {
+  max-width: 500px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.ctaEyebrow {
+  font-size: 0.6rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+
+.ctaHeading {
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  font-weight: 400;
+  color: var(--color-cream);
+}
+
+.ctaButtons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.ctaButtonPrimary {
+  padding: 0.75rem 2.5rem;
+  background: var(--color-gold);
+  color: var(--color-dark);
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  transition: opacity 0.25s;
+}
+
+.ctaButtonPrimary:hover {
+  opacity: 0.85;
+}
+
+.ctaButtonSecondary {
+  padding: 0.75rem 2.5rem;
+  border: 1px solid var(--color-dark-soft);
+  color: var(--color-text-muted);
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  transition: border-color 0.25s, color 0.25s;
+}
+
+.ctaButtonSecondary:hover {
+  border-color: var(--color-gold);
+  color: var(--color-gold);
+}
+
+/* ── Page wrapper ─────────────────────────────── */
+.page {
+  min-height: 100vh;
+}
