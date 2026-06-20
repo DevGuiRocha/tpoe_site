@@ -33,3 +33,20 @@
   color: var(--color-text-muted);
   letter-spacing: 0.05em;
 }
+
+.dev {
+  margin-top: 0.5rem;
+  font-size: 0.65rem;
+  color: var(--color-text-muted);
+  letter-spacing: 0.05em;
+}
+
+.devLink {
+  color: var(--color-gold);
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.devLink:hover {
+  opacity: 1;
+}
