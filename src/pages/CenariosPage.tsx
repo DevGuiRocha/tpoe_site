@@ -13,7 +13,7 @@ export default function CenariosPage() {
 
           {/* Header */}
           <header className={styles.header}>
-            <p className={styles.eyebrow}>Mônaco · 2032</p>
+            <p className={styles.eyebrow}>Mônaco · 20XX</p>
             <h1 className={styles.title}>Cenários</h1>
             <div className={styles.divider} />
             <p className={styles.description}>Sugestões de cenários para cenas</p>

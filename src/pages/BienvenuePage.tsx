@@ -20,7 +20,7 @@ export default function BienvenuePage() {
 
           {/* Header */}
           <header className={styles.header}>
-            <p className={styles.eyebrow}>Mônaco · 2032</p>
+            <p className={styles.eyebrow}>Mônaco · 20XX</p>
             <h1 className={styles.title}>Bienvenue</h1>
             <div className={styles.divider} />
           </header>
