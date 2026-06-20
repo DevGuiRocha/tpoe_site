@@ -5,6 +5,7 @@ import FamiliesPage from './pages/FamiliesPage'
 import FamilyDetailPage from './pages/FamilyDetailPage'
 import IndependentesPage from './pages/IndependentesPage'
 import CenariosPage from './pages/CenariosPage'
+import SegredosPage from './pages/SegredosPage'
 
 export default function App() {
   return (
@@ -18,6 +19,7 @@ export default function App() {
         <Route path="/familias/:slug" element={<FamilyDetailPage />} />
         <Route path="/independentes" element={<IndependentesPage />} />
         <Route path="/cenarios" element={<CenariosPage />} />
+        <Route path="/segredos" element={<SegredosPage />} />
       </Routes>
     </BrowserRouter>
   )

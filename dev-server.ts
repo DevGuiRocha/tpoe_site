@@ -8,6 +8,7 @@ import 'dotenv/config'
 
 const app = express()
 app.use(cors())
+app.use(express.json())
 
 const notion = new Client({ auth: process.env.NOTION_TOKEN })
 
@@ -55,6 +56,45 @@ app.get('/api/families', async (_req, res) => {
   } catch (err) {
     console.error(err)
     res.status(500).json({ error: 'Falha ao buscar dados do Notion' })
+  }
+})
+
+app.post('/api/secrets', async (req, res) => {
+  const { nomePersonagem, idadePersonagem, finalTelefone, independente, segredo } = req.body
+
+  if (!nomePersonagem || !segredo) {
+    res.status(400).json({ error: 'Nome do personagem e segredo são obrigatórios' })
+    return
+  }
+
+  try {
+    await notion.pages.create({
+      parent: { database_id: process.env.NOTION_DB_SEGREDOS! },
+      properties: {
+        'Nome Personagem': {
+          title: [{ text: { content: String(nomePersonagem).slice(0, 100) } }],
+        },
+        'Idade Personagem': {
+          number: Number(idadePersonagem) || null,
+        },
+        'Final Telefone': {
+          number: finalTelefone ? Number(finalTelefone) : null,
+        },
+        'Independente': {
+          select: { name: independente === 'Sim' ? 'Sim' : 'Não' },
+        },
+        'Segredo': {
+          rich_text: [{ text: { content: String(segredo).slice(0, 2000) } }],
+        },
+        'Status': {
+          select: { name: 'Rascunho' },
+        },
+      },
+    })
+    res.status(201).json({ ok: true })
+  } catch (err) {
+    console.error(err)
+    res.status(500).json({ error: 'Falha ao salvar segredo' })
   }
 })
 
