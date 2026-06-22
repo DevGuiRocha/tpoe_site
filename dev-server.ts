@@ -59,6 +59,32 @@ app.get('/api/families', async (_req, res) => {
   }
 })
 
+app.get('/api/scenarios', async (_req, res) => {
+  try {
+    const response = await notion.databases.query({
+      database_id: process.env.NOTION_DB_CENARIOS!,
+      filter: { property: 'Status', select: { equals: 'Publicado' } },
+      sorts: [{ property: 'Data', direction: 'ascending' }],
+    })
+    const splitPipe = (v: string) => v.split('|').map((s) => s.trim()).filter(Boolean)
+    const scenarios = (response.results as PageObjectResponse[]).map((page) => {
+      const p = page.properties
+      return {
+        nome:      getText(p['Nome']),
+        distrito:  getSelect(p['Distrito']),
+        descricao: getText(p['Descricao']) || null,
+        tags:      splitPipe(getText(p['Tags'])),
+        imagens:   splitPipe(getText(p['Imagens'])),
+        status:    getSelect(p['Status']),
+      }
+    })
+    res.json(scenarios)
+  } catch (err) {
+    console.error(err)
+    res.status(500).json({ error: 'Falha ao buscar cenários' })
+  }
+})
+
 app.post('/api/secrets', async (req, res) => {
   const { nomePersonagem, idadePersonagem, finalTelefone, independente, segredo } = req.body
 
@@ -78,7 +104,7 @@ app.post('/api/secrets', async (req, res) => {
           number: Number(idadePersonagem) || null,
         },
         'Final Telefone': {
-          number: finalTelefone ? Number(finalTelefone) : null,
+          rich_text: [{ text: { content: String(finalTelefone ?? '') } }],
         },
         'Independente': {
           select: { name: independente === 'Sim' ? 'Sim' : 'Não' },

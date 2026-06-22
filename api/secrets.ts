@@ -33,7 +33,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           number: Number(idadePersonagem) || null,
         },
         'Final Telefone': {
-          number: finalTelefone ? Number(finalTelefone) : null,
+          rich_text: [{ text: { content: String(finalTelefone ?? '') } }],
         },
         'Independente': {
           select: { name: independente === 'Sim' ? 'Sim' : 'Não' },
