@@ -1,5 +1,20 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
-import { getSheetsClient, SHEET_ID, col } from './_sheets'
+import { google } from 'googleapis'
+
+function getSheetsClient() {
+  const auth = new google.auth.GoogleAuth({
+    credentials: {
+      client_email: process.env.GOOGLE_CLIENT_EMAIL,
+      private_key: (process.env.GOOGLE_PRIVATE_KEY ?? '').replace(/\\n/g, '\n'),
+    },
+    scopes: ['https://www.googleapis.com/auth/spreadsheets'],
+  })
+  return google.sheets({ version: 'v4', auth })
+}
+
+function col(values: string[], index: number): string {
+  return (values[index] ?? '').toString().trim()
+}
 
 function toSlug(name: string): string {
   return name
@@ -10,18 +25,17 @@ function toSlug(name: string): string {
     .replace(/^-|-$/g, '')
 }
 
-// Colunas: Nome(0) Categoria(1) Historia(2) Descricao(3) BrasaoFamilia(4) ResidenciaFamilia(5) Economia(6) Status(7) Data(8)
 export default async function handler(_req: VercelRequest, res: VercelResponse) {
   res.setHeader('Access-Control-Allow-Origin', '*')
 
   try {
     const sheets = getSheetsClient()
     const response = await sheets.spreadsheets.values.get({
-      spreadsheetId: SHEET_ID,
+      spreadsheetId: process.env.GOOGLE_SHEETS_ID!,
       range: 'Familias!A2:I',
     })
 
-    const rows = response.data.values ?? []
+    const rows = (response.data.values ?? []) as string[][]
     const families = rows
       .filter((r) => col(r, 7) === 'Publicado' && col(r, 0))
       .map((r) => {

@@ -1,7 +1,17 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
-import { getSheetsClient, SHEET_ID } from './_sheets'
+import { google } from 'googleapis'
 
-// Colunas: Nome Personagem(0) Idade Personagem(1) Final Telefone(2) Independente(3) Segredo(4) Status(5)
+function getSheetsClient() {
+  const auth = new google.auth.GoogleAuth({
+    credentials: {
+      client_email: process.env.GOOGLE_CLIENT_EMAIL,
+      private_key: (process.env.GOOGLE_PRIVATE_KEY ?? '').replace(/\\n/g, '\n'),
+    },
+    scopes: ['https://www.googleapis.com/auth/spreadsheets'],
+  })
+  return google.sheets({ version: 'v4', auth })
+}
+
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   res.setHeader('Access-Control-Allow-Origin', '*')
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS')
@@ -19,7 +29,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
     const sheets = getSheetsClient()
     await sheets.spreadsheets.values.append({
-      spreadsheetId: SHEET_ID,
+      spreadsheetId: process.env.GOOGLE_SHEETS_ID!,
       range: 'Segredos!A:F',
       valueInputOption: 'RAW',
       requestBody: {
