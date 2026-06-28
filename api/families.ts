@@ -1,28 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
-import { Client } from '@notionhq/client'
-import type { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints'
-
-const notion = new Client({ auth: process.env.NOTION_TOKEN })
-
-function getText(prop: PageObjectResponse['properties'][string]): string {
-  if (prop.type === 'rich_text') {
-    return prop.rich_text.map((r) => r.plain_text).join('')
-  }
-  if (prop.type === 'title') {
-    return prop.title.map((r) => r.plain_text).join('')
-  }
-  return ''
-}
-
-function getSelect(prop: PageObjectResponse['properties'][string]): string {
-  if (prop.type === 'select' && prop.select) return prop.select.name
-  return ''
-}
-
-function getUrl(prop: PageObjectResponse['properties'][string]): string | null {
-  if (prop.type === 'url') return prop.url ?? null
-  return null
-}
+import { getSheetsClient, SHEET_ID, col } from './_sheets'
 
 function toSlug(name: string): string {
   return name
@@ -33,40 +10,40 @@ function toSlug(name: string): string {
     .replace(/^-|-$/g, '')
 }
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+// Colunas: Nome(0) Categoria(1) Historia(2) Descricao(3) BrasaoFamilia(4) ResidenciaFamilia(5) Economia(6) Status(7) Data(8)
+export default async function handler(_req: VercelRequest, res: VercelResponse) {
   res.setHeader('Access-Control-Allow-Origin', '*')
 
   try {
-    const dbId = process.env.NOTION_DB_FAMILIAS!
-    const response = await notion.databases.query({
-      database_id: dbId,
-      filter: {
-        property: 'Status',
-        select: { equals: 'Publicado' },
-      },
-      sorts: [{ property: 'Nome', direction: 'ascending' }],
+    const sheets = getSheetsClient()
+    const response = await sheets.spreadsheets.values.get({
+      spreadsheetId: SHEET_ID,
+      range: 'Familias!A2:I',
     })
 
-    const families = (response.results as PageObjectResponse[]).map((page) => {
-      const p = page.properties
-      const nome = getText(p['Nome'])
-      return {
-        slug:      toSlug(nome),
-        nome,
-        categoria: getSelect(p['Categoria']) as 'Alfa' | 'Beta' | 'Gama',
-        descricao: getText(p['Descricao']) || null,
-        historia:  getText(p['Historia']) || null,
-        brasao:    getUrl(p['Brasao Familia']),
-        economia:  getText(p['Economia']) || null,
-        residencia: getUrl(p['Residencia Familia']),
-        status:    getSelect(p['Status']) as 'Publicado' | 'Rascunho',
-        data:      p['Data'].type === 'date' ? (p['Data'].date?.start ?? null) : null,
-      }
-    })
+    const rows = response.data.values ?? []
+    const families = rows
+      .filter((r) => col(r, 7) === 'Publicado' && col(r, 0))
+      .map((r) => {
+        const nome = col(r, 0)
+        return {
+          slug:       toSlug(nome),
+          nome,
+          categoria:  col(r, 1) as 'Alfa' | 'Beta' | 'Gama',
+          historia:   col(r, 2) || null,
+          descricao:  col(r, 3) || null,
+          brasao:     col(r, 4) || null,
+          residencia: col(r, 5) || null,
+          economia:   col(r, 6) || null,
+          status:     col(r, 7) as 'Publicado' | 'Rascunho',
+          data:       col(r, 8) || null,
+        }
+      })
+      .sort((a, b) => (a.data ?? '').localeCompare(b.data ?? ''))
 
     res.status(200).json(families)
   } catch (error) {
-    console.error('Notion API error:', error)
-    res.status(500).json({ error: 'Falha ao buscar dados do Notion' })
+    console.error('Sheets API error:', error)
+    res.status(500).json({ error: 'Falha ao buscar dados do Google Sheets' })
   }
 }
