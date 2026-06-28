@@ -95,6 +95,30 @@ app.get('/api/scenarios', async (_req, res) => {
   }
 })
 
+// ── GET /api/static-info ──────────────────────────────────────────────────────
+app.get('/api/static-info', async (req, res) => {
+  const pagina = req.query.pagina as string | undefined
+  if (!pagina) {
+    res.status(400).json({ error: 'Parâmetro "pagina" obrigatório' })
+    return
+  }
+
+  try {
+    const sheets = getSheetsClient()
+    const response = await sheets.spreadsheets.values.get({
+      spreadsheetId: SHEET_ID,
+      range: 'Infos Estaticas!A2:B',
+    })
+    const rows = response.data.values ?? []
+    const row = rows.find((r) => col(r, 0) === pagina)
+    const texto = row ? col(row, 1) || null : null
+    res.json({ texto })
+  } catch (err) {
+    console.error(err)
+    res.status(500).json({ error: 'Falha ao buscar informação' })
+  }
+})
+
 // ── POST /api/secrets ─────────────────────────────────────────────────────────
 app.post('/api/secrets', async (req, res) => {
   const { nomePersonagem, idadePersonagem, finalTelefone, independente, segredo } = req.body
