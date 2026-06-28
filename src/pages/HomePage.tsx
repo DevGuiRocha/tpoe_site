@@ -108,7 +108,9 @@ function FamilyTier({ tier, families, loading }: FamilyTierProps) {
     <div className={styles.familyTier}>
       <div className={styles.familyTierHeader}>
         <span className={styles.familyTierLabel}>Família</span>
-        <h3 className={styles.familyTierTitle}>{tier}</h3>
+        <Link to={info.path} className={styles.familyTierTitleLink}>
+          <h3 className={styles.familyTierTitle}>{tier}</h3>
+        </Link>
       </div>
       <ul className={styles.familyList}>
         {loading ? (

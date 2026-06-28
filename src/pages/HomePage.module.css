@@ -207,6 +207,16 @@
   margin-bottom: 0.3rem;
 }
 
+.familyTierTitleLink {
+  text-decoration: none;
+}
+
+.familyTierTitleLink:hover .familyTierTitle {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-color: var(--color-gold);
+}
+
 .familyTierTitle {
   font-family: var(--font-serif);
   font-size: 1.6rem;
