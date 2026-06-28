@@ -6,6 +6,7 @@ import FamilyDetailPage from './pages/FamilyDetailPage'
 import IndependentesPage from './pages/IndependentesPage'
 import CenariosPage from './pages/CenariosPage'
 import SegredosPage from './pages/SegredosPage'
+import FinanceiroPage from './pages/FinanceiroPage'
 
 export default function App() {
   return (
@@ -20,6 +21,7 @@ export default function App() {
         <Route path="/independentes" element={<IndependentesPage />} />
         <Route path="/cenarios" element={<CenariosPage />} />
         <Route path="/segredos" element={<SegredosPage />} />
+        <Route path="/financeiro" element={<FinanceiroPage />} />
       </Routes>
     </BrowserRouter>
   )

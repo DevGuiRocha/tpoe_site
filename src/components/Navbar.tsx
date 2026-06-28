@@ -9,6 +9,7 @@ const navItems = [
   { label: 'Famílias Gama', path: '/familias/gama' },
   { label: 'Independentes', path: '/independentes' },
   { label: 'Cenários', path: '/cenarios' },
+  { label: 'Financeiro', path: '/financeiro' },
   { label: 'Segredos', path: '/segredos' },
 ]
 
