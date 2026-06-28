@@ -8,16 +8,16 @@
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   border-bottom: 1px solid rgba(255,255,255,0.04);
-  padding: 1.25rem 2rem;
+  padding: 1.25rem 3rem;
 }
 
 .nav {
-  max-width: 1200px;
+  max-width: 1440px;
   margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 2rem;
+  gap: 1.5rem;
 }
 
 .brand {
@@ -47,7 +47,7 @@
 .navList {
   list-style: none;
   display: flex;
-  gap: 2rem;
+  gap: 1.5rem;
   align-items: center;
 }
 
