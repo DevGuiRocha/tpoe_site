@@ -110,7 +110,8 @@ app.get('/api/static-info', async (req, res) => {
       range: 'Infos Estaticas!A2:B',
     })
     const rows = response.data.values ?? []
-    const row = rows.find((r) => col(r, 0) === pagina)
+    const key = pagina.toLowerCase()
+    const row = rows.find((r) => col(r, 0).toLowerCase() === key)
     const texto = row ? col(row, 1) || null : null
     res.json({ texto })
   } catch (err) {

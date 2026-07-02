@@ -28,7 +28,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     })
 
     const rows = (response.data.values ?? []) as string[][]
-    const row = rows.find((r) => (r[0] ?? '').trim() === pagina)
+    const key = pagina.toLowerCase()
+    const row = rows.find((r) => (r[0] ?? '').trim().toLowerCase() === key)
     const texto = row ? (row[1] ?? '').trim() : null
 
     res.status(200).json({ texto })

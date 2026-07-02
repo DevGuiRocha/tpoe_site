@@ -1,16 +1,15 @@
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import { useStaticInfo } from '../hooks/useStaticInfo'
 import styles from './BienvenuePage.module.css'
 
-const paragraphs = [
-  `Dinheiro. Requinte. Laços familiares. O que mais foi preciso para que os novos pais fundadores recriassem um país que, por si só, já arrancava suspiros do resto do mundo? Oh, sim... Segredos. Segredos que vão desde os artistas filhos do nepotismo até a Alta Cúpula que domina o submundo monegasco.`,
-  `E ali está Mônaco, em pleno ano de 2032, prosperando cada vez mais. Sinônimo de luxúria, um lugar totalmente diferente, o mais belo, o mais caro... e o mais seguro (será?). Enquanto eles enchem os bolsos com o dinheiro de turistas deslumbrados e se orgulham de uma culinária impecável, rica em influências francesas e italianas, eu prefiro saborear o que realmente me alimenta: a hipocrisia de vocês.`,
-  `E quem é que junta todas as peças desse quebra-cabeça de aparências? Quem expõe os moradores de Monte Carlo sem nenhum receio, forçando cada um de vocês a lidar com alguém que, pela primeira vez, não se assusta com os seus sobrenomes tradicionais e tampouco tem o silêncio comprado por suas fortunas? Eu! A jornalista anônima que vocês aprenderam a temer. Podem me chamar de Gossip Girl.`,
-  `O meu vlog é o diário não autorizado desta aristocracia, até porque, vamos ser sinceros: Mônaco é linda sob o sol, mas fica muito mais interessante quando as máscaras caem à noite. Então me digam, o que aguarda você por aqui? Expandir seus negócios? Iniciar seus estudos na faculdade mais cara da Europa? Sair da casa dos pais? Fugir de problemas do passado? Ou apenas tentando montar o próprio império sob o meu teto?`,
-  `Fiquem à vontade para espiar, mas tenham sempre em mente que hoje vocês leem os segredos de alguém, e amanhã, os seus podem ser a minha manchete principal.`,
-]
-
 export default function BienvenuePage() {
+  const { texto, loading, error } = useStaticInfo('Bienvenue')
+
+  const paragraphs = texto
+    ? texto.split(/\r?\n/).map((p) => p.trim()).filter(Boolean)
+    : []
+
   return (
     <div className={styles.page}>
       <Navbar />
@@ -27,7 +26,13 @@ export default function BienvenuePage() {
 
           {/* Body text */}
           <article className={styles.article}>
-            {paragraphs.map((p, i) => (
+            {loading && (
+              <p className={styles.paragraph}>Carregando...</p>
+            )}
+            {!loading && (error || paragraphs.length === 0) && (
+              <p className={styles.paragraph}>Em atualização...</p>
+            )}
+            {!loading && !error && paragraphs.map((p, i) => (
               <p key={i} className={styles.paragraph}>{p}</p>
             ))}
           </article>

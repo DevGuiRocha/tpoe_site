@@ -7,7 +7,7 @@ export default function FinanceiroPage() {
   const { texto, loading, error } = useStaticInfo('Financeiro')
 
   const paragraphs = texto
-    ? texto.split('\n').map((p) => p.trim()).filter(Boolean)
+    ? texto.split(/\r?\n/).map((p) => p.trim()).filter(Boolean)
     : []
 
   return (
